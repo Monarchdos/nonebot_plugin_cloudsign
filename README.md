@@ -19,7 +19,7 @@ _✨ NoneBot 云签到插件 ✨_
 
 **云签到**  
 
-一款数据存放于云端的签到插件,并附有使用积分的小游戏功能,公平的积分系统,数据不会被机器人主人所更改,所有使用本插件的用户积分数据互通,并可参与与所有用户的积分排行
+一款数据存放于云端的签到积分综合插件,并附有使用积分的小游戏功能,公平的积分系统,数据不会被机器人主人所更改,所有使用本插件的用户积分数据互通,并可参与与所有用户的积分排行.
 
 
 🎇**本插件的数据在所有插件使用者中互通**
@@ -57,7 +57,7 @@ pip install --upgrade nonebot-plugin-cloudsignx
   </tr>
   <tr align="center">
     <td> 签到 </td>
-    <td> ♥每日签到 </td>
+    <td> ♥每日签到,每日首签与连续签到都将获得额外积分 </td>
   </tr>
   <tr align="center">
     <td> 积分</td>
@@ -70,6 +70,10 @@ pip install --upgrade nonebot-plugin-cloudsignx
   <tr align="center">
     <td> 转账 n@xxx </td>
     <td> 将n积分转账给xxx </td>
+  </tr>
+    <tr align="center">
+    <td> 打劫@xxx </td>
+    <td> 打劫xxx的积分,有几率获得对方的部分积分,也可能打劫不到或被反打劫 </td>
   </tr>
     <tr align="center">
     <td> 领取积分补助 </td>
@@ -108,6 +112,26 @@ pip install --upgrade nonebot-plugin-cloudsignx
     <td> 出售 xxx </td>
     <td> 将钓到的xxx卖出,获得积分 </td>
   </tr>
+  <tr align="center">
+    <td> 猜数字 xxx </td>
+    <td> 消耗xxx积分开始猜数字游戏,猜中则积分翻倍 </td>
+  </tr>
+  <tr align="center">
+    <td> 我猜 xxx </td>
+    <td> 在指定次数内进行猜数字游戏,xxx为你所猜的数字 </td>
+  </tr>
+  <tr align="center">
+    <td> 猜拳石头 xxx </td>
+    <td> 消耗xxx积分进行猜拳游戏,胜利则积分翻倍 </td>
+  </tr>
+  <tr align="center">
+    <td> 猜拳剪刀 xxx </td>
+    <td> 消耗xxx积分进行猜拳游戏,胜利则积分翻倍 </td>
+  </tr>
+  <tr align="center">
+    <td> 猜拳布 xxx </td>
+    <td> 消耗xxx积分进行猜拳游戏,胜利则积分翻倍 </td>
+  </tr>
 </tr>
     <tr align="center">
     <td> 签到状态 </td>
@@ -116,17 +140,18 @@ pip install --upgrade nonebot-plugin-cloudsignx
 </tr>
     <tr align="center">
     <td> 功能 </td>
-    <td> 列出功能的指令, [功能 功能名]可查看功能名使用方法 </td>
+    <td> 显示功能列表 </td>
   </tr>
   <tr align="center">
-    <td> 打劫@xxx </td>
-    <td> 打劫xxx的积分,有几率获得对方的部分积分,也可能打劫不到或被反打劫 </td>
+    <td> 功能 xxx </td>
+    <td> 查看xxx功能的使用方法 </td>
   </tr>
 <tr align="center">
     <td> @检查更新@ </td>
     <td> 检查插件是否为新版本 </td>
   </tr>
 </table>
+
 
 #### Tip: 指令与参数间的空格不可省略
 
@@ -137,10 +162,16 @@ pip install --upgrade nonebot-plugin-cloudsignx
 <details>
 <summary>展开/收起</summary>
 
+## **2023-01-10 V2.0.0**
+
+  * 新增 猜数字 小游戏系统,开始游戏后系统将随机生成一个数字,在规定步数内猜对这个数字则获胜,积分翻倍.
+  * 新增 猜拳 小游戏系统,在石头、剪刀、布中与系统进行猜拳,胜利则积分翻倍.
+  * 优化细节~
+
 ## **2023-01-08 V1.3.0**
 
-  * 新增"出售"功能,可将钓到的鱼进行卖出,获取积分
-  * 新增"售出"功能,可将挖到的矿进行卖出,获取积分
+  * 新增"出售"功能,可将钓到的鱼进行卖出,获取积分.
+  * 新增"售出"功能,可将挖到的矿进行卖出,获取积分.
   * 优化细节~
 
 ## **2023-01-07 V1.2.8**

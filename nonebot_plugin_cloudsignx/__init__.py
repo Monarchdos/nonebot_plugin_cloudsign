@@ -1,7 +1,7 @@
 '''
 Name: Code.
 Author: Monarchdos
-Date: 2022-12-27
+Date: 2023-01-10
 '''
 from nonebot import on_command
 from nonebot.plugin import on_regex
@@ -13,8 +13,8 @@ import random
 import json
 import time
 __plugin_meta__ = PluginMetadata(
-    name = "云签到",
-    description = "基于云端的签到积分系统",
+    name = "☁云签到☁",
+    description = "基于云端的签到综合积分系统",
     usage = "发送'功能'查看",
 )
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
@@ -30,7 +30,7 @@ def get_at(data: str) -> list:
     except Exception:
         return []
 
-qd = on_regex("^签到$|^积分$|^挖矿$|^我的背包$|^钓鱼$|^我的鱼篓$|^功能$|^功能 (.*?)$|^领取积分补助$|^签到状态$|^排行榜$|^打劫(.*?)$|^抽奖 (\d+)$|^(出售|售出) ([\u4e00-\u9fa5]+)$|^转账 (\d+)(.*?)$|^(@检查更新@)$|^#(.*?)&")
+qd = on_regex("^签到$|^积分$|^(挖矿|我的背包)$|^(钓鱼|我的鱼篓)$|^功能$|^功能 (.*?)$|^领取积分补助$|^签到状态$|^排行榜$|^打劫(.*?)$|^抽奖 (\d+)$|^(出售|售出) ([\u4e00-\u9fa5]+)$|^转账 (\d+)(.*?)$|^(@检查更新@)$|^#(.*?)$|^(猜拳石头|猜拳剪刀|猜拳布) (\d+)$|^(猜数字|我猜) (\d+)$")
 @qd.handle()
 async def qd_(bot: Bot, event: GroupMessageEvent):
     s = str(event.get_message()).strip()
@@ -43,7 +43,7 @@ async def qd_(bot: Bot, event: GroupMessageEvent):
     s = s.replace("[CQ:at,qq=" + str(ats) + "]", "")
     if len(s) > 66: return
 
-    version = "1.3.0"
+    version = "2.0.0"
 
     data = {
         "command": s,

@@ -12,7 +12,7 @@ with open("README.md", "r", encoding="utf-8", errors="ignore") as fh:
     long_description = fh.read()
 
 setuptools.setup(name="nonebot_plugin_cloudsignx",
-                version="1.3.0",
+                version="2.0.0",
                 author="Monarchdos",
                 author_email="admin@ayfre.com",
                 keywords=("pip", "nonebot2", "nonebot", "nonebot_plugin"),
