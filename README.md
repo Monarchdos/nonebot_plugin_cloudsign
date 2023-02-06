@@ -150,6 +150,26 @@ pip install --upgrade nonebot-plugin-cloudsignx
     <td> @检查更新@ </td>
     <td> 检查插件是否为新版本 </td>
   </tr>
+<tr align="center">
+    <td> #存入银行 xxx </td>
+    <td> 将xxx积分存入银行中 </td>
+  </tr>
+<tr align="center">
+    <td> #取出银行 xxx </td>
+    <td> 将银行中的xxx积分取出 </td>
+  </tr>
+<tr align="center">
+    <td> #抢银行 </td>
+    <td> 有几率获得系统银行部分积分,也可能被罚部分积分 </td>
+  </tr>
+<tr align="center">
+    <td> #反馈 xxx </td>
+    <td> 反馈xxx问题 </td>
+  </tr>
+<tr align="center">
+    <td> #反馈信箱 </td>
+    <td> 查看反馈的问题 </td>
+  </tr>
 </table>
 
 
