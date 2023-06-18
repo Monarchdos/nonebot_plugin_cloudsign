@@ -163,6 +163,14 @@ pip install --upgrade nonebot-plugin-cloudsignx
     <td> 有几率获得系统银行部分积分,也可能被罚部分积分 </td>
   </tr>
 <tr align="center">
+    <td> #扔漂流瓶 xxx </td>
+    <td> 将xxx写入漂流瓶，并扔进海里，可以被其他人捞到，只能被捞取一次 </td>
+  </tr>
+<tr align="center">
+    <td> #捞漂流瓶 </td>
+    <td> 从海中捞漂流瓶，无法捞到自己扔的漂流瓶 </td>
+  </tr>
+<tr align="center">
     <td> #反馈 xxx </td>
     <td> 反馈xxx问题 </td>
   </tr>
@@ -171,6 +179,7 @@ pip install --upgrade nonebot-plugin-cloudsignx
     <td> 查看反馈的问题 </td>
   </tr>
 </table>
+
 
 
 #### Tip: 指令与参数间的空格不可省略
