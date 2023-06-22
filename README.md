@@ -171,6 +171,10 @@ pip install --upgrade nonebot-plugin-cloudsignx
     <td> 从海中捞漂流瓶，无法捞到自己扔的漂流瓶 </td>
   </tr>
 <tr align="center">
+    <td> #邀请码 xxxxx </td>
+    <td> 邀请码为对方qq号,视为对方邀请了你,双方积分+50 </td>
+  </tr>
+<tr align="center">
     <td> #反馈 xxx </td>
     <td> 反馈xxx问题 </td>
   </tr>
@@ -179,6 +183,7 @@ pip install --upgrade nonebot-plugin-cloudsignx
     <td> 查看反馈的问题 </td>
   </tr>
 </table>
+
 
 
 
