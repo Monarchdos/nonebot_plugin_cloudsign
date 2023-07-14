@@ -171,6 +171,18 @@ pip install --upgrade nonebot-plugin-cloudsignx
     <td> 从海中捞漂流瓶，无法捞到自己扔的漂流瓶 </td>
   </tr>
 <tr align="center">
+    <td> #漂流瓶信息 </td>
+    <td> 查看自己的漂流瓶统计信息！ </td>
+  </tr>
+<tr align="center">
+    <td> #60秒 </td>
+    <td> 每日60秒读懂世界 </td>
+  </tr>
+<tr align="center">
+    <td> #等级信息 </td>
+    <td> 查看自己的等级以及经验值 </td>
+  </tr>
+<tr align="center">
     <td> #邀请码 xxxxx </td>
     <td> 邀请码为对方qq号,视为对方邀请了你,双方积分+50 </td>
   </tr>
@@ -183,6 +195,7 @@ pip install --upgrade nonebot-plugin-cloudsignx
     <td> 查看反馈的问题 </td>
   </tr>
 </table>
+
 
 
 
@@ -201,6 +214,7 @@ pip install --upgrade nonebot-plugin-cloudsignx
   * 新增 猜数字 小游戏系统,开始游戏后系统将随机生成一个数字,在规定步数内猜对这个数字则获胜,积分翻倍.
   * 新增 猜拳 小游戏系统,在石头、剪刀、布中与系统进行猜拳,胜利则积分翻倍.
   * 优化细节~
+  * 后续非重大更新外都将采用热更新
 
 ## **2023-01-08 V1.3.0**
 
