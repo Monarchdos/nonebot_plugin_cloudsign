@@ -194,7 +194,12 @@ pip install --upgrade nonebot-plugin-cloudsignx
     <td> #反馈信箱 </td>
     <td> 查看反馈的问题 </td>
   </tr>
+<tr align="center">
+    <td> #夺宝 </td>
+    <td> 宝物每小时整点刷新，宝物只可以被一人夺得，宝物刷新后五分钟未被夺得将消失，夺得宝物将获得大量积分 </td>
+  </tr>
 </table>
+
 
 
 
