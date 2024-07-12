@@ -1,9 +1,7 @@
+
+<h1 align="center">_✨ CloudSign_云签到 ✨_</h1>
 <p align="center">
-  <a href="https://v2.nonebot.dev/"><img src="https://v2.nonebot.dev/logo.png" width="200" height="200" alt="nonebot"></a>
-</p>
-<div align="center">
-_✨ NoneBot 云签到插件 ✨_
-<br><br><a href="./LICENSE">
+<a href="./LICENSE">
     <img src="https://img.shields.io/github/license/Monarchdos/nonebot_plugin_cloudsign.svg" alt="license">
 </a>
 <a href="https://pypi.python.org/pypi/nonebot_plugin_cloudsignx">
@@ -12,8 +10,8 @@ _✨ NoneBot 云签到插件 ✨_
 <a href="https://www.python.org">
     <img src="https://img.shields.io/badge/python-3.8+-blue.svg" alt="python">
 </a>
+</p>
 
-</div>
 
 ## 📖 介绍
 
@@ -197,6 +195,10 @@ pip install --upgrade nonebot-plugin-cloudsignx
 <tr align="center">
     <td> #夺宝 </td>
     <td> 宝物每小时整点刷新，宝物只可以被一人夺得，宝物刷新后五分钟未被夺得将消失，夺得宝物将获得大量积分 </td>
+  </tr>
+<tr align="center">
+    <td> #探险 前/后/左/右 </td>
+    <td> 秘境开启后进行探险，有四个方向可以走，每个方向都有不同的事件，事件包括发现宝藏(获得积分),遭遇袭击(失去积分),无事发生,退出秘境(结束探索);随着探索的深入风险也会变大。 </td>
   </tr>
 </table>
 

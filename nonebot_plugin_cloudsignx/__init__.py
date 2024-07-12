@@ -1,7 +1,8 @@
 '''
-Name: Code.
+Name: CloudSign
 Author: Monarchdos
-Date: 2023-01-10
+Date: 2023-01-10 17:22:49
+LastEditTime: 2024-07-12 15:48:15
 '''
 from nonebot import on_command
 from nonebot.plugin import on_regex
@@ -56,6 +57,7 @@ async def qd_(bot: Bot, event: GroupMessageEvent):
         "platform": "qq",
         "token": int(time.time())
     }
+    
     if event.user_id != "80000000": 
         res = "\n" + str(requests.post(url=bytes.fromhex(url).decode(), data=data, verify=False).text)
         if "wwwroot" in res: return
