@@ -202,19 +202,32 @@ pip install --upgrade nonebot-plugin-cloudsignx
   </tr>
 </table>
 
-
-
-
-
-
 #### Tip: 指令与参数间的空格不可省略
 
+## 📃 配置项
 
+直接在全局配置项`env.dev`后添加即可，配置项修改后重启NoneBot生效。
+
+#### 	cloudsign_reply_at
+
+类型：Bool
+
+默认值：True
+
+说明：是否开启机器人回复后艾特用户。
+
+```
+ cloudsign_reply_at=true
+```
 
 ## 📝 更新日志
 
 <details>
 <summary>展开/收起</summary>
+## **2024-07-14 V2.1.0**
+
+  * 优化代码结构.
+  * 新增机器人回复是否'@用户'的设置.
 
 ## **2023-01-10 V2.0.0**
 
