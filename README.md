@@ -1,4 +1,3 @@
-
 <h1 align="center">_✨ CloudSign_云签到 ✨_</h1>
 <p align="center">
 <a href="./LICENSE">
@@ -10,7 +9,11 @@
 <a href="https://www.python.org">
     <img src="https://img.shields.io/badge/python-3.8+-blue.svg" alt="python">
 </a>
+<a href="https://pypi.python.org/pypi/nonebot_plugin_cloudsignx">
+    <img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fcloudsign.ayfre.com%2Frelation%2Fusernum%2F&query=num&label=%E7%94%A8%E6%88%B7%E6%95%B0&color=%23f37f40" alt="用户数">
+</a>
 </p>
+
 
 
 ## 📖 介绍
@@ -32,6 +35,7 @@ nb plugin install nonebot-plugin-cloudsignx
 ```
 
 **使用 pip 安装**  
+
 ```bash
 pip install nonebot-plugin-cloudsignx
 ```
@@ -119,15 +123,7 @@ pip install --upgrade nonebot-plugin-cloudsignx
     <td> 在指定次数内进行猜数字游戏,xxx为你所猜的数字 </td>
   </tr>
   <tr align="center">
-    <td> 猜拳石头 xxx </td>
-    <td> 消耗xxx积分进行猜拳游戏,胜利则积分翻倍 </td>
-  </tr>
-  <tr align="center">
-    <td> 猜拳剪刀 xxx </td>
-    <td> 消耗xxx积分进行猜拳游戏,胜利则积分翻倍 </td>
-  </tr>
-  <tr align="center">
-    <td> 猜拳布 xxx </td>
+    <td> 猜拳石头|剪刀|布 xxx </td>
     <td> 消耗xxx积分进行猜拳游戏,胜利则积分翻倍 </td>
   </tr>
 </tr>
@@ -171,10 +167,6 @@ pip install --upgrade nonebot-plugin-cloudsignx
 <tr align="center">
     <td> #漂流瓶信息 </td>
     <td> 查看自己的漂流瓶统计信息！ </td>
-  </tr>
-<tr align="center">
-    <td> #60秒 </td>
-    <td> 每日60秒读懂世界 </td>
   </tr>
 <tr align="center">
     <td> #等级信息 </td>
@@ -224,6 +216,7 @@ pip install --upgrade nonebot-plugin-cloudsignx
 
 <details>
 <summary>展开/收起</summary>
+
 ## **2024-07-14 V2.1.0**
 
   * 优化代码结构.
