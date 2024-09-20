@@ -233,6 +233,7 @@ pip install --upgrade nonebot-plugin-cloudsignx
 
 <details>
 <summary>展开/收起</summary>
+
 ## **2024-09-20 V2.1.2**
 
   * 修复已知问题。
