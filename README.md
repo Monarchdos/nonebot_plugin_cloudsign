@@ -15,8 +15,6 @@
 </p>
 
 
-
-
 ## 📖 介绍
 
 **云签到**  
@@ -79,7 +77,7 @@ pip install --upgrade nonebot-plugin-cloudsignx
         <td> 打劫xxx的积分,有几率获得对方的部分积分,也可能打劫不到或被反打劫 </td>
     </tr>
     <tr align="center">
-        <td> #打劫记录 </td>
+        <td> 打劫记录 </td>
         <td> 查看打劫统计信息 </td>
     </tr>
     <tr align="center">
@@ -221,13 +219,14 @@ pip install --upgrade nonebot-plugin-cloudsignx
 
 默认值：False
 
-说明：是否在回复时引用用户消息。
+说明：是否在回复时艾特用户。
 
 ```
  cloudsign_reply_at=false
 ```
 
-⚠**注：*cloudsign_reply_quote*和*cloudsign_reply_at*不可以同时为*true*；可以同时为*false*表示直接回复消息。**
+> [!WARNING]
+> **注意：*cloudsign_reply_quote*和*cloudsign_reply_at*不可以同时为*true*；可以同时为*false*表示直接回复消息。**
 
 ## 📝 更新日志
 
