@@ -153,8 +153,8 @@ pip install --upgrade nonebot-plugin-cloudsignx
         <td> 查看自己的漂流瓶统计信息 </td>
     </tr>
     <tr align="center">
-        <td> #等级信息 </td>
-        <td> 查看自己的等级以及经验值 </td>
+        <td> #成语接龙 xx</td>
+        <td> 消耗xx积分开启成语接龙游戏,获胜积分翻倍 </td>
     </tr>
     <tr align="center">
         <td> #邀请码 xxxxx </td>
