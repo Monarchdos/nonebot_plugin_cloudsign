@@ -7,8 +7,9 @@ LastEditTime: 2024-09-20 10:33:09
 from pydantic import BaseModel, field_validator
 
 class Config(BaseModel):
-    cloudsign_key: str = ""
     cloudsign_master: str = ""
+    cloudsign_app_key: str = ""
+    cloudsign_app_secret: str = ""
     cloudsign_reply_quote: bool = True
     cloudsign_reply_at: bool = False
 
@@ -23,14 +24,8 @@ class Config(BaseModel):
             raise ValueError('Cannot enable both cloudsign_reply_at and cloudsign_reply_quote at the same time')
         return v
 
-    @field_validator('cloudsign_key', mode='before')
-    def validate_cloudsign_key(cls, v):
-        if v and (len(v) != 16 or not re.match(r'^[a-zA-Z0-9]+$', v)):
-            raise ValueError('cloudsign_key must be 16 alphanumeric characters')
-        return v
-
     @field_validator('cloudsign_master', mode='before')
     def validate_cloudsign_master(cls, v):
-        if v and (len(v) >= 11 or not v.isdigit()):
-            raise ValueError('cloudsign_master must be less than 11 digits')
+        if v and (len(v) >= 12 or not v.isdigit()):
+            raise ValueError('cloudsign_master must be less than 12 digits')
         return v

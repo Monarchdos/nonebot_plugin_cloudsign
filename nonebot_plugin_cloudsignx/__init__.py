@@ -2,82 +2,126 @@
 Name: CloudSign
 Author: Monarchdos <monarchdosw@gmail.com>
 Date: 2023-01-10 17:22:49
-LastEditTime: 2024-09-20 10:30:44
+LastEditTime: 2026-06-23 16:15:41
 '''
-from nonebot import on_regex, logger, get_plugin_config
-from nonebot.adapters.onebot.v11 import Bot, GroupMessageEvent, MessageSegment
-from nonebot.plugin import PluginMetadata
-from .config import Config
-import requests
-import json
+import hmac
+import hashlib
 import time
 import re
 
+import httpx
+from nonebot import on_regex, logger, get_plugin_config
+from nonebot.adapters.onebot.v11 import Bot, GroupMessageEvent, MessageSegment, Message
+from nonebot.plugin import PluginMetadata
+
+from .config import Config
+
 __plugin_meta__ = PluginMetadata(
-    name = "☁云签到☁",
-    description = "基于云端的签到综合积分系统。",
-    usage = "发送'功能'查看。",
-    type = "application",
-    homepage = "https://github.com/Monarchdos/nonebot_plugin_cloudsign",
-    supported_adapters = {"~onebot.v11"},
+    name="☁云签到☁",
+    description="基于云端的签到综合积分系统。",
+    usage="发送'功能'查看。",
+    type="application",
+    homepage="https://github.com/Monarchdos/nonebot_plugin_cloudsign",
+    supported_adapters={"~onebot.v11"},
 )
+
+version = "3.0.0"
 
 plugin_config = get_plugin_config(Config)
 
-core = '68747470733a2f2f636c6f75647369676e2e61796672652e636f6d2f'
-def get_at(data: str) -> list:
-    qq_list = []
-    data = json.loads(data)
-    try:
-        for msg in data['message']:
-            if msg['type'] == 'at':
-                qq_list.append(int(msg['data']['qq']))
-    except (KeyError, TypeError, json.JSONDecodeError):
-        pass
-    return qq_list
+CORE_URL_HEX = '68747470733a2f2f636c6f75647369676e2e61796672652e636f6d2f'
+CORE_URL = bytes.fromhex(CORE_URL_HEX).decode()
+
+def generate_signature(params: dict, app_secret: str) -> str:
+    if not app_secret:
+        return ""
+    sorted_items = sorted(
+        (k, str(v)) for k, v in params.items() 
+        if v is not None and str(v) != ""
+    )
+    query_string = "&".join(f"{k}={v}" for k, v in sorted_items)
+    return hmac.new(
+        app_secret.encode("utf-8"),
+        query_string.encode("utf-8"),
+        hashlib.sha256
+    ).hexdigest()
 
 qd = on_regex(
-    r"^签到$|^积分$|^(挖矿|我的背包|钓鱼|我的鱼篓)$|^(出售|售出) ([\u4e00-\u9fa5]+)$|^功能(?: (.*?))?$|^领取积分补助$|^签到状态$|^排行榜$|^打劫(.*?)$|^抽奖 (\d+)$|^转账 (\d+)(.*?)$|^@检查更新@$|^#(.*?)$|^猜拳(石头|剪刀|布) (\d+)$|^(猜数字|我猜) (\d+)$"
+    r"^签到$|^积分$|^(挖矿|我的背包|钓鱼|我的鱼篓)$|^(出售|售出) ([\u4e00-\u9fa5]+)$|^功能(?: (.*?))?$|"
+    r"^领取积分补助$|^签到状态$|^排行榜$|^打劫(.*?)$|^抽奖 (\d+)$|^转账 (\d+)(.*?)$|^@检查更新@$|^#(.*?)$|"
+    r"^猜拳(石头|剪刀|布) (\d+)$|^(猜数字|我猜) (\d+)$"
 )
 
 @qd.handle()
-async def qd_(bot: Bot, event: GroupMessageEvent):
-    s = str(event.get_message()).strip()
-    username = str(event.sender.nickname)
-    ats = get_at(event.json())
-    ats = ats[0] if ats else event.user_id
-    s = re.sub(r'\[CQ:at,qq=\d+,name=@.*?\]', '', s)
-    if not re.match(r'^\d+$', str(event.group_id)): return
-    if len(s) > 33 or not s.replace('#', '').replace(' ', ''): return
+async def handle_cloudsign(bot: Bot, event: GroupMessageEvent):
+    command = event.get_plaintext().strip()
+    at_segments = event.get_message()["at"]
+    target_qq = int(at_segments[0].data["qq"]) if at_segments else event.user_id
 
-    version = "2.1.2"
+    if len(command) > 33 or not command.replace('#', '').strip():
+        return
 
-    data = {
-        "command": s,
-        "at": ats,
+    timestamp = int(time.time())
+
+    payload = {
+        "command": command,
+        "at": target_qq,
         "qq": event.user_id,
         "qun": event.group_id,
         "botqq": event.self_id,
-        "username": username,
+        "username": event.sender.nickname or "",
         "version": version,
-        "platform": "qq",
-        "token": int(time.time()),
-        "key": plugin_config.cloudsign_key if plugin_config.cloudsign_key else "",
-        "master": plugin_config.cloudsign_master if plugin_config.cloudsign_master else "",
+        "platform": "nonebot",
+        "timestamp": timestamp,
+        "app_key": plugin_config.cloudsign_app_key,
+        "master": plugin_config.cloudsign_master,
     }
 
+    if plugin_config.cloudsign_app_secret:
+        payload["sign"] = generate_signature(payload, plugin_config.cloudsign_app_secret)
+
     try:
-        # Simulated requests may ban the IP
-        res = requests.post(bytes.fromhex(core).decode(), data).text
-        if "wwwroot" in res or "html" in res or len(res) <= 1: return
-        reply = ""
+        async with httpx.AsyncClient(timeout=10.0) as client:
+            response = await client.post(CORE_URL, data=payload)
+            response.raise_for_status()
+            res_text = response.text.strip()
+
+        if not res_text or any(x in res_text for x in ["wwwroot", "html", "<body"]):
+            return
+
+        if res_text.startswith("[PRIVATE:"):
+            match = re.match(r"\[PRIVATE:(\d+)\](.*)", res_text, re.DOTALL)
+            if match:
+                target_qq = int(match.group(1))
+                content = match.group(2).strip()
+                try:
+                    await bot.send_private_msg(user_id=target_qq, message=content)
+                except Exception:
+                    logger.warning(f"私聊发送失败: {target_qq}")
+            await qd.finish()
+
+        message = Message()
         if plugin_config.cloudsign_reply_quote:
-            reply = MessageSegment.reply(event.message_id)
+            message.append(MessageSegment.reply(event.message_id))
         elif plugin_config.cloudsign_reply_at:
-            reply = MessageSegment.at(event.user_id) + "\n"
-        if res.startswith("[CQ:image,") and "file=" in res:
-            file_url = res.split("file=")[-1].strip("]")
-            res = MessageSegment.image(file_url)
-        await qd.finish(reply + res)
-    except requests.RequestException as e:
-        logger.warning("Server connection failed.")
+            message.append(MessageSegment.at(event.user_id))
+            message.append("\n")
+
+        if "[CQ:image," in res_text and "file=" in res_text:
+            match = re.search(r"file=(.*?)[,\]]", res_text)
+            if match:
+                message.append(MessageSegment.image(match.group(1)))
+            else:
+                message.append(res_text)
+        else:
+            message.append(res_text)
+
+        await qd.finish(message)
+
+    except httpx.HTTPStatusError as e:
+        logger.error(f"Server Error: {e.response.status_code}")
+    except httpx.RequestError as e:
+        logger.warning(f"无法连接到云签到服务器: {e}")
+    except Exception as e:
+        logger.exception("处理请求时发生意外错误")
+
