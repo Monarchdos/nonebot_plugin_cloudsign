@@ -201,6 +201,40 @@ pip install --upgrade nonebot-plugin-cloudsignx
 
 直接在全局配置项`env.dev`后添加即可，配置项修改后重启NoneBot生效。
 
+#### 	cloudsign_master
+
+类型：String
+
+说明：机器人主人qq号。填写机器人主人qq号后重启NoneBot，对机器人发送`#申请密钥`进行申请，将获得到的AppKey与AppSecret填写进配置项，重启NoneBot生效。
+
+```
+ cloudsign_master="123456789"
+```
+
+#### cloudsign_app_key
+
+类型：String
+
+默认值：True
+
+说明：AppKey，由机器人主人通过发送`#申请密钥`进行申请。
+
+```
+ cloudsign_reply_quote="cs_123456789"
+```
+
+#### cloudsign_app_secret
+
+类型：String
+
+默认值：True
+
+说明：AppSecret，由机器人主人通过发送`#申请密钥`进行申请。
+
+```
+ cloudsign_app_secret="1a2b3c4d5e"
+```
+
 #### 	cloudsign_reply_quote
 
 类型：Bool
@@ -232,6 +266,9 @@ pip install --upgrade nonebot-plugin-cloudsignx
 
 <details>
 <summary>展开/收起</summary>
+## **2026-06-23 V3.0.0**
+
+修复已知问题。
 
 ## **2024-09-20 V2.1.2**
 

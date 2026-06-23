@@ -2,7 +2,7 @@
 Name: CloudSign
 Author: Monarchdos <monarchdosw@gmail.com>
 Date: 2023-01-10 17:22:49
-LastEditTime: 2026-06-23 16:15:41
+LastEditTime: 2026-06-23 21:30:27
 '''
 import hmac
 import hashlib
@@ -122,6 +122,3 @@ async def handle_cloudsign(bot: Bot, event: GroupMessageEvent):
         logger.error(f"Server Error: {e.response.status_code}")
     except httpx.RequestError as e:
         logger.warning(f"无法连接到云签到服务器: {e}")
-    except Exception as e:
-        logger.exception("处理请求时发生意外错误")
-
