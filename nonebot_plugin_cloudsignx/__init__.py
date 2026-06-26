@@ -4,10 +4,14 @@ Author: Monarchdos <monarchdosw@gmail.com>
 Date: 2023-01-10 17:22:49
 LastEditTime: 2026-06-23 21:30:27
 '''
-import hmac
-import hashlib
+import sys
 import time
 import re
+from pathlib import Path
+
+_pkg_dir = str(Path(__file__).resolve().parent)
+if _pkg_dir not in sys.path:
+    sys.path.insert(0, _pkg_dir)
 
 import httpx
 from nonebot import on_regex, logger, get_plugin_config
@@ -15,6 +19,7 @@ from nonebot.adapters.onebot.v11 import Bot, GroupMessageEvent, MessageSegment, 
 from nonebot.plugin import PluginMetadata
 
 from .config import Config
+from .client import generate_signature, CORE_URL
 
 __plugin_meta__ = PluginMetadata(
     name="☁云签到☁",
@@ -29,23 +34,6 @@ version = "3.0.0"
 
 plugin_config = get_plugin_config(Config)
 
-CORE_URL_HEX = '68747470733a2f2f636c6f75647369676e2e61796672652e636f6d2f'
-CORE_URL = bytes.fromhex(CORE_URL_HEX).decode()
-
-def generate_signature(params: dict, app_secret: str) -> str:
-    if not app_secret:
-        return ""
-    sorted_items = sorted(
-        (k, str(v)) for k, v in params.items() 
-        if v is not None and str(v) != ""
-    )
-    query_string = "&".join(f"{k}={v}" for k, v in sorted_items)
-    return hmac.new(
-        app_secret.encode("utf-8"),
-        query_string.encode("utf-8"),
-        hashlib.sha256
-    ).hexdigest()
-
 qd = on_regex(
     r"^签到$|^积分$|^(挖矿|我的背包|钓鱼|我的鱼篓)$|^(出售|售出) ([\u4e00-\u9fa5]+)$|^功能(?: (.*?))?$|"
     r"^领取积分补助$|^签到状态$|^排行榜$|^打劫(.*?)$|^抽奖 (\d+)$|^转账 (\d+)(.*?)$|^@检查更新@$|^#(.*?)$|"
@@ -56,7 +44,13 @@ qd = on_regex(
 async def handle_cloudsign(bot: Bot, event: GroupMessageEvent):
     command = event.get_plaintext().strip()
     at_segments = event.get_message()["at"]
-    target_qq = int(at_segments[0].data["qq"]) if at_segments else event.user_id
+    if at_segments:
+        try:
+            target_qq = int(at_segments[0].data["qq"])
+        except (ValueError, TypeError, IndexError):
+            target_qq = event.user_id
+    else:
+        target_qq = event.user_id
 
     if len(command) > 33 or not command.replace('#', '').strip():
         return

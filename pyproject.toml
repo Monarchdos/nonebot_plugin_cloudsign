@@ -1,8 +1,8 @@
 [tool.poetry]
 name = "nonebot-plugin-cloudsignx"
-version = "3.0.0"
+version = "3.1.0"
 description = "Cloudsign_云签到"
-authors = ["Monarchdos <admin@ayfre.com>"]
+authors = ["Monarchdos <monarchdosw@gmail.com>"]
 readme = "README.md"
 homepage = "https://github.com/Monarchdos/nonebot_plugin_cloudsign"
 repository = "https://github.com/Monarchdos/nonebot_plugin_cloudsign"

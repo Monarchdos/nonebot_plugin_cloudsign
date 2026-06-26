@@ -9,10 +9,14 @@ from typing import Union
 
 class Config(BaseModel):
     cloudsign_master: Union[str, int] = ""
-    cloudsign_app_key: str = ""
-    cloudsign_app_secret: str = ""
+    cloudsign_app_key: Union[str, int] = ""
+    cloudsign_app_secret: Union[str, int] = ""
     cloudsign_reply_quote: bool = True
     cloudsign_reply_at: bool = False
+
+    @field_validator('cloudsign_app_key', 'cloudsign_app_secret', mode='before')
+    def coerce_to_str(cls, v):
+        return str(v) if v else ""
 
     @field_validator('cloudsign_reply_quote', 'cloudsign_reply_at', mode='before')
     def check_reply_options(cls, v, info):
@@ -24,4 +28,3 @@ class Config(BaseModel):
         if info.field_name == 'cloudsign_reply_at' and v and values.get('cloudsign_reply_quote'):
             raise ValueError('Cannot enable both cloudsign_reply_at and cloudsign_reply_quote at the same time')
         return v
-        

@@ -215,24 +215,24 @@ pip install --upgrade nonebot-plugin-cloudsignx
 
 类型：String
 
-默认值：True
+默认值：`""`
 
 说明：AppKey，由机器人主人通过发送`#申请密钥`进行申请。
 
 ```
- cloudsign_reply_quote="cs_123456789"
+cloudsign_app_key="cs_123456789"
 ```
 
 #### cloudsign_app_secret
 
 类型：String
 
-默认值：True
+默认值：`""`
 
 说明：AppSecret，由机器人主人通过发送`#申请密钥`进行申请。
 
 ```
- cloudsign_app_secret="1a2b3c4d5e"
+cloudsign_app_secret="1a2b3c4d5e"
 ```
 
 #### 	cloudsign_reply_quote
@@ -266,6 +266,15 @@ pip install --upgrade nonebot-plugin-cloudsignx
 
 <details>
 <summary>展开/收起</summary>
+
+## **2026-06-26 V3.1.0**
+
+  * 新增子插件系统。
+  * 新增 `#申请密钥` 命令，机器人主人可直接在群内申请 AppKey/AppSecret。
+  * 新增签名校验机制，防止伪造请求。
+  * 修复 `cloudsign_app_key` 配置项不加引号时启动报错的问题。
+  * 优化代码结构，去除重复代码。
+
 ## **2026-06-23 V3.0.0**
 
 修复已知问题。
